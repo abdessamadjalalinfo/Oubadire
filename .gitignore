@@ -6,7 +6,6 @@
 .DS_Store
 Thumbs.db
 /bower_components
-.env
 .env.backup
 /.idea
 /.vscode
@@ -34,19 +33,14 @@ public/mix-manifest.json
 
 public/themes
 public/docs
-resources/docs
 
-.phpunit.result.cache
-/storage/.license
-/storage/fonts
-/storage/installing
-/storage/installed
+
 
 /lang/*
 !/lang/en
 
 /log
 
-storage/framework/laravel-excel/
+
 /.scribe
 /.env.testing

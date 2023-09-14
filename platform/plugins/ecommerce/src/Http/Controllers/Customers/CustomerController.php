@@ -26,6 +26,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use platform\core\acl\src\Models\User;
+
 class CustomerController extends BaseController
 {
     public function index(CustomerTable $dataTable)
@@ -52,6 +54,14 @@ class CustomerController extends BaseController
         $customer->password = Hash::make($request->input('password'));
         $customer->dob = Carbon::parse($request->input('dob'))->toDateString();
         $customer->save();
+
+       
+        
+        
+       
+       
+
+        
 
         event(new CreatedContentEvent(CUSTOMER_MODULE_SCREEN_NAME, $request, $customer));
 

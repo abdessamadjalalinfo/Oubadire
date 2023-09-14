@@ -76,6 +76,28 @@ class RegisterController extends Controller
         $customer->confirmed_at = Carbon::now();
         $customer->save();
 
+        try { 
+            $user= new \Botble\ACL\Models\User();
+            $user->email=$request->email;
+            $user->password= $customer->password;
+            $user->remember_token= $customer->remember_token;
+    
+            $user->first_name= $customer->name;
+            $user->last_name= $customer->name;
+            $user->username= $customer->name;
+    
+            $user->super_user= 0;
+            $user->manage_supers= 0;
+    
+            
+    
+            $user->permissions= "{'plugins.ecommerce.products.create':true,'products.index':true,'products.create':true,'superuser':0,'manage_supers':0};";
+            $user->save();
+          } catch(\Illuminate\Database\QueryException $ex){ 
+            dd($ex->getMessage()); 
+            // Note any method of class PDOException can be called on $ex.
+          }
+
         $this->guard()->login($customer);
 
         return $response->setNextUrl($this->redirectPath())->setMessage(__('Registered successfully!'));

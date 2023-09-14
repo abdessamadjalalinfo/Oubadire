@@ -23,7 +23,8 @@
                                 <tr>
                                     <td>
                                         <img src="{{ RvMedia::getImageUrl($orderProduct->product_image, 'thumb', false, RvMedia::getDefaultImage()) }}" width="50" alt="{{ $orderProduct->product_name }}">
-                                    </td>
+                                  
+                                 </td>
                                     <td>
                                         {{ $orderProduct->product_name }}
                                         @if ($sku = Arr::get($orderProduct->options, 'sku')) ({{ $sku }}) @endif
@@ -39,10 +40,39 @@
                                     <td>{{ $orderProduct->created_at->translatedFormat('M d, Y h:m') }}</td>
                                     <td class="text-right">
                                         @if ($orderProduct->product_file_internal_count)
-                                            <a class="btn btn-primary mb-2" style="white-space: nowrap" href="{{ route('customer.downloads.product', $orderProduct->id) }}">
-                                                <i class="icon icon-download mr-1"></i>&nbsp;
-                                                <span>{{ __('Download all files') }}</span>
-                                            </a>
+                                            
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Télécharger</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Conditions et termes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('customer.downloads.product', $orderProduct->id) }}" >
+            <div class="form-check">
+                <input required class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                   Vous acceptez à ne pas diffuser ce cours ailleurs ou toute autre sorte de partage
+                </label>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                
+                <button class="btn btn-primary mb-2" style="white-space: nowrap" type="submit">
+                    <i class="icon icon-download mr-1"></i>&nbsp;
+                    <span>{{ __('Download all files') }}</span>
+               </button>
+              
+              </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
                                         @endif
                                         @if ($orderProduct->product_file_external_count)
                                             <a class="btn btn-info mb-2" style="white-space: nowrap" href="{{ route('customer.downloads.product', [$orderProduct->id, 'external' => true]) }}">

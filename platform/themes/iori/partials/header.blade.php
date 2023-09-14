@@ -8,6 +8,7 @@
 
         {!! BaseHelper::googleFonts('https://fonts.googleapis.com/css2?family=' . urlencode(theme_option('primary_font', 'Manrope')) . ':wght@200;300;400;500;600;700;800&display=swap') !!}
         <style>
+            
             :root {
                 --primary-color: {{ theme_option('primary_color', '#006D77') }};
                 --primary-hover-color: {{ theme_option('primary_hover_color', '#06d6a0') }};

@@ -1,4 +1,10 @@
 <div class="header-top">
+    <style>
+        .header .main-menu li a {
+            font-size : 10px;
+            font-weight: 900;
+            }
+    </style>
     <div class="header-wrap">
         <div class="container">
             <div class="top-bar">
